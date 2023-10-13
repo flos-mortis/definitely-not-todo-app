@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { RootState } from '../state/store';
+import {useDrag} from 'react-dnd'
 
 import ModalEdit from './ModalEdit';
 import ModalAddSubtask from './ModalAddSubtask';
@@ -19,6 +20,14 @@ const TaskCard = ({id}: TaskCardProps) => {
     const[isModalActive, setModalActive] = React.useState(false)
     const task = useAppSelector(state => selectTaskById(state, id))
 
+    const [{isDragging}, drag] = useDrag(() => ({
+        type: "taskCard",
+        item: {id: task?.id, taskStatus: task?.status}, 
+        collect: (monitor) => ({
+            isDragging: !!monitor.isDragging(),
+        })
+    }))
+
     const dispatch = useAppDispatch()
 
     const handleCompletedChange = () => {
@@ -36,7 +45,6 @@ const TaskCard = ({id}: TaskCardProps) => {
       
     const handleModalClose = () => {
         setModalActive(false)
-        console.log('cllicked')
     }
     return(
         <li>
@@ -47,12 +55,13 @@ const TaskCard = ({id}: TaskCardProps) => {
                         <p>DescriptioN: {task?.description}</p>
                         <p>Date: {task?.date}</p>
                         <p>{task?.priority}</p>
+                        <p>Expire date: {task?.dateExp}</p>
                         <ModalEdit id={task?.id}></ModalEdit>
                         <ModalAddSubtask headTaskId={task?.id}></ModalAddSubtask>
                     </Modal>
                 )}
             </div>
-            <div className='task-card' onClick={handleModalOpen}>
+            <div className='task-card' ref={drag}>
                 <input 
                     type='checkbox'
                     checked={task?.completed} 

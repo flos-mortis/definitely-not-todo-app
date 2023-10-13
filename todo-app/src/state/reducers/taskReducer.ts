@@ -27,7 +27,8 @@ const createActionD = withMatcher((payload?: {
         id: number, 
         title: string, 
         description: string,
-        priority: TaskPriority
+        priority: TaskPriority,
+        expDate: string
     }) => {
     return {
         type: 'tasks/taskEdited',
@@ -45,6 +46,17 @@ const createActionE = withMatcher((payload?: {
         payload
     }
 }
+)
+
+const createActionF = withMatcher((payload? : {
+        id: number,
+        newStatus: string
+    }) => {
+        return {
+            type: 'tasks/taskStatusChanged',
+            payload
+        }
+    }
 )
 
 const initialState: TaskState = {
@@ -137,7 +149,8 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                     ...task,
                     title: action.payload.title,
                     description: action.payload.description,
-                    priority: action.payload.priority
+                    priority: action.payload.priority,
+                    dateExp: action.payload.expDate
                 }
             })
         }
@@ -168,6 +181,21 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                 ...updatedTasks,
                 newSubTask
             ]
+        }
+    }
+    if (createActionF.match(action)) {
+        return {
+            ...state,
+            tasks: state.tasks.map(task => {
+                if (task.id !== action.payload?.id) {
+                    return task
+                }
+                return {
+                    ...task,
+                    status: action.payload.newStatus
+                }
+            })
+
         }
     }
     return state

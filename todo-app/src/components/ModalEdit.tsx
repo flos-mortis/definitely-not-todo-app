@@ -16,10 +16,15 @@ const ModalEdit = ({id}: ModalEditProps) => {
     const[isModalActive, setModalActive] = React.useState(false)
     const[text, setText] = React.useState({
         title: '',
-        description: ''
+        description: '',
+        expDate: ''
     })
     const[selectPriority, setSelectPriority] = React.useState('')
+    const dateInputRef = React.useRef(null)
     
+    const date = new Date()
+    let currentDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+
     const task = useAppSelector(state => selectTaskById(state, id))
 
     const dispatch = useAppDispatch()
@@ -37,7 +42,8 @@ const ModalEdit = ({id}: ModalEditProps) => {
                 id: task.id, 
                 title: text.title, 
                 description: text.description, 
-                priority: `Priority ${selectPriority}`
+                priority: `Priority ${selectPriority}`,
+                expDate: text.expDate
             }})
             setModalActive(false)
         }
@@ -74,6 +80,14 @@ const ModalEdit = ({id}: ModalEditProps) => {
                         name='description'
                         value={text.description}
                         onChange={handleInputChange}
+                    />
+                    <p>Set expire date</p>
+                    <input 
+                        type='date' 
+                        name='expDate' 
+                        onChange={handleInputChange} 
+                        min={currentDate}
+                        ref={dateInputRef}
                     />
                     <select onChange={handleSelectChange} value={selectPriority}>
                         <option

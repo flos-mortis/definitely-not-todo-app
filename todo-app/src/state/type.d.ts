@@ -5,6 +5,7 @@ interface ITask {
     completed: boolean,
     status: string,
     date?: string,
+    dateExp?: string, 
     priority: string,
     subTasks: ITask[]
 }
