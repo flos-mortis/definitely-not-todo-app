@@ -4,6 +4,7 @@ import { RootState } from '../state/store';
 
 import ModalEdit from './ModalEdit';
 import ModalAddSubtask from './ModalAddSubtask';
+import Modal from './Modal';
 
 interface TaskCardProps {
     key: number,
@@ -15,7 +16,7 @@ const selectTaskById = (state: RootState, taskId: number) => {
 }
 
 const TaskCard = ({id}: TaskCardProps) => {
-
+    const[isModalActive, setModalActive] = React.useState(false)
     const task = useAppSelector(state => selectTaskById(state, id))
 
     const dispatch = useAppDispatch()
@@ -25,13 +26,33 @@ const TaskCard = ({id}: TaskCardProps) => {
             dispatch({type: 'tasks/taskToggled', payload: id})
     }
 
-    const onDelete = () => {
+    const handleDelete = () => {
         dispatch({type: 'tasks/taskDeleted', payload: task?.id})
     } 
 
+    const handleModalOpen = () => {
+        setModalActive(true)
+    }
+      
+    const handleModalClose = () => {
+        setModalActive(false)
+        console.log('cllicked')
+    }
     return(
         <li>
-            <div className='task-card'>
+            <div>
+                {isModalActive && (
+                    <Modal isShown={isModalActive} onClose={handleModalClose}>
+                        <p>Title: {task?.title}</p>
+                        <p>DescriptioN: {task?.description}</p>
+                        <p>Date: {task?.date}</p>
+                        <p>{task?.priority}</p>
+                        <ModalEdit id={task?.id}></ModalEdit>
+                        <ModalAddSubtask headTaskId={task?.id}></ModalAddSubtask>
+                    </Modal>
+                )}
+            </div>
+            <div className='task-card' onClick={handleModalOpen}>
                 <input 
                     type='checkbox'
                     checked={task?.completed} 
@@ -39,9 +60,7 @@ const TaskCard = ({id}: TaskCardProps) => {
                 />
                 <p>{task?.title}</p>
                 <p>{task?.priority}</p>
-                <ModalEdit id={task?.id}></ModalEdit>
-                <ModalAddSubtask headTaskId={task?.id}></ModalAddSubtask>
-                <button onClick={onDelete}>Delete</button>
+                <button onClick={handleDelete}>Delete</button>
             </div>
         </li>
     )

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 interface ModalProps {
     isShown: boolean;
     children: React.ReactNode;
-    onClose: () => void; 
+    onClose: () => void
 }
 
 const Modal = ({isShown, children, onClose}: ModalProps) => {
