@@ -10,8 +10,8 @@ Adaptive design, mobile friendly
 - ~~add new subtask~~
 - ~~edit task~~
 - ~~delete task~~
-- queue/development/done
-- drag-n-drop
+- ~~queue/development/done~~
+- ~~drag-n-drop~~
 - priorities
 - comments
 - attach files
