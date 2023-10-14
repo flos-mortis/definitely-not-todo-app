@@ -6,6 +6,7 @@ interface ITask {
     status: string,
     date?: string,
     dateExp?: string, 
+    timeInWork?: number,
     priority: string,
     subTasks: ITask[]
 }

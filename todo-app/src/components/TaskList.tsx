@@ -17,17 +17,17 @@ const TaskList = (props: TaskListProps) => {
 
     const [{isOver}, drop] = useDrop(() => ({
         accept: "taskCard",
-        drop: (item: ITask) => addTaskToColumn(item.id, item.status, props.title),
+        drop: (item: ITask) => addTaskToColumn(item.id, props.title),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
         })
     }))
 
-    const addTaskToColumn = (id: number, taskStatus: string, columnTitle: string) => {
-            dispatch({type: 'tasks/taskStatusChanged', payload: {
-                id: id,
-                newStatus: columnTitle
-            }})
+    const addTaskToColumn = (id: number, columnTitle: string) => {
+        dispatch({type: 'tasks/taskStatusChanged', payload: {
+            id: id,
+            newStatus: columnTitle
+        }})
     }
  
     const taskItems = tasks.map((task: ITask) => {

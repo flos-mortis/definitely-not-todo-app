@@ -3,9 +3,8 @@ import { useAppDispatch, useAppSelector } from '../state/hooks';
 import { RootState } from '../state/store';
 import {useDrag} from 'react-dnd'
 
-import ModalEdit from './ModalEdit';
-import ModalAddSubtask from './ModalAddSubtask';
 import Modal from './Modal';
+import ModalOpenTask from './ModalOpenTask';
 
 interface TaskCardProps {
     key: number,
@@ -51,13 +50,7 @@ const TaskCard = ({id}: TaskCardProps) => {
             <div>
                 {isModalActive && (
                     <Modal isShown={isModalActive} onClose={handleModalClose}>
-                        <p>Title: {task?.title}</p>
-                        <p>DescriptioN: {task?.description}</p>
-                        <p>Date: {task?.date}</p>
-                        <p>{task?.priority}</p>
-                        <p>Expire date: {task?.dateExp}</p>
-                        <ModalEdit id={task?.id}></ModalEdit>
-                        <ModalAddSubtask headTaskId={task?.id}></ModalAddSubtask>
+                        <ModalOpenTask task={task}></ModalOpenTask>
                     </Modal>
                 )}
             </div>
@@ -67,7 +60,7 @@ const TaskCard = ({id}: TaskCardProps) => {
                     checked={task?.completed} 
                     onChange={handleCompletedChange} 
                 />
-                <p>{task?.title}</p>
+                <p onClick={handleModalOpen}>{task?.title}</p>
                 <p>{task?.priority}</p>
                 <button onClick={handleDelete}>Delete</button>
             </div>
