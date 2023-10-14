@@ -2,7 +2,7 @@ import {AnyAction} from 'redux'
 import withMatcher from '../helper'
 import { TaskPriority, TaskStatus } from '../../enums'
 
-const createActionA = withMatcher((payload?: {title: string, date: string}) => {
+const createActionA = withMatcher((payload: {title: string, date: string}) => {
     return {
         type: 'tasks/taskAdded',
         payload,
@@ -16,7 +16,7 @@ const createActionC = withMatcher((payload?: number) => {
     }
 })
 
-const createActionD = withMatcher((payload?: {
+const createActionD = withMatcher((payload: {
         id: number, 
         title: string, 
         description: string,
@@ -29,7 +29,7 @@ const createActionD = withMatcher((payload?: {
     }
 })
 
-const createActionE = withMatcher((payload?: {
+const createActionE = withMatcher((payload: {
         headTaskId: number,
         title: string,
         date: string
@@ -108,7 +108,7 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                 ...state.tasks,
                 {
                     id: nextTaskId(state.tasks),
-                    title: action.payload?.title,
+                    title: action.payload.title,
                     description: '',
                     status: TaskStatus.QUEUE,
                     date: action.payload?.date,
@@ -144,7 +144,7 @@ export default function taskReducer(state: TaskState = initialState, action: Any
     if (createActionE.match(action)) {
         const newSubTask: ITask = {
             id: nextTaskId(state.tasks),
-            title: action.payload?.title,
+            title: action.payload.title,
             description: '',
             status: TaskStatus.QUEUE,
             date: action.payload?.date,

@@ -1,9 +1,9 @@
 interface ITask {
     id: number,
-    title?: string,
+    title: string,
     description: string,
     status: string,
-    date?: string,
+    date: string,
     dateExp?: string, 
     timeInWork?: number,
     priority: string,

@@ -15,7 +15,7 @@ const ModalOpenTask = ({task}: ModalOpenTaskProps) => {
             <p>Date: {task?.date}</p>
             <p>{task?.priority}</p>
             <p>Expire date: {task?.dateExp}</p>
-            <ModalEdit id={task?.id}></ModalEdit>
+            <ModalEdit id={task?.id} key={task?.id}></ModalEdit>
             <ModalAddSubtask headTaskId={task?.id}></ModalAddSubtask>
         </div>
     )

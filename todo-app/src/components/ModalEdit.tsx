@@ -34,6 +34,7 @@ const ModalEdit = ({id}: ModalEditProps) => {
             ...text,
             [e.target.name]: e.target.value
         })
+        console.log(e.target.value)
     }
 
     const handleSaveClick = () => {
@@ -67,44 +68,46 @@ const ModalEdit = ({id}: ModalEditProps) => {
             <div>
               {isModalActive && (
                 <Modal isShown={isModalActive} onClose={handleModalClose}>
-                    <input 
-                        placeholder='Title'
-                        type='text'
-                        name='title'
-                        value={text.title}
-                        onChange={handleInputChange}
-                    />
-                    <input 
-                        placeholder='Description'
-                        type='text'
-                        name='description'
-                        value={text.description}
-                        onChange={handleInputChange}
-                    />
-                    <p>Set expire date</p>
-                    <input 
-                        type='date' 
-                        name='expDate' 
-                        onChange={handleInputChange} 
-                        min={currentDate}
-                        ref={dateInputRef}
-                    />
-                    <select onChange={handleSelectChange} value={selectPriority}>
-                        <option
-                            value='1' 
-                        >1</option>
-                        <option
-                            value='2' 
-                        >2</option>
-                        <option
-                            value='3' 
-                        >3</option>
-                        <option
-                            value='4' 
-                        >4</option>
-                    </select>
-                    <p>{task?.date}</p>
-                    <button onClick={handleSaveClick}>Save</button>
+                    <form>
+                        <input 
+                            placeholder='Title'
+                            type='text'
+                            name='title'
+                            value={text.title}
+                            onChange={handleInputChange}
+                        />
+                        <input 
+                            placeholder='Description'
+                            type='text'
+                            name='description'
+                            value={text.description}
+                            onChange={handleInputChange}
+                        />
+                        <p>Set expire date</p>
+                        <input 
+                            type='date' 
+                            name='expDate' 
+                            onChange={handleInputChange} 
+                            min={currentDate}
+                            ref={dateInputRef}
+                        />
+                        <select onChange={handleSelectChange} value={selectPriority}>
+                            <option
+                                value='1' 
+                            >1</option>
+                            <option
+                                value='2' 
+                            >2</option>
+                            <option
+                                value='3' 
+                            >3</option>
+                            <option
+                                value='4' 
+                            >4</option>
+                        </select>
+                        <p>{task?.date}</p>
+                        <button onClick={handleSaveClick} disabled={text.title.length === 0}>Save</button>
+                    </form>
                 </Modal>
               )}
             </div>
