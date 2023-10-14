@@ -2,7 +2,6 @@ interface ITask {
     id: number,
     title?: string,
     description: string,
-    completed: boolean,
     status: string,
     date?: string,
     dateExp?: string, 

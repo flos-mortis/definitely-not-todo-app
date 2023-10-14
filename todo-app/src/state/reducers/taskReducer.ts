@@ -9,13 +9,6 @@ const createActionA = withMatcher((payload?: {title: string, date: string}) => {
     }
 })
 
-const createActionB = withMatcher((payload?: number) => {
-    return {
-        type: 'tasks/taskToggled',
-        payload,
-    }
-})
-
 const createActionC = withMatcher((payload?: number) => {
     return {
         type: 'tasks/taskDeleted',
@@ -59,13 +52,23 @@ const createActionF = withMatcher((payload? : {
     }
 )
 
+const createActionG = withMatcher((payload? : {
+        id: number,
+        timeInWork: number
+    }) => {
+        return {
+            type: 'tasks/taskTimeInWork',
+            payload
+        }
+    }
+    )
+
 const initialState: TaskState = {
     tasks: [
         {
             id: 0,
             title: 'Редактировать таски',
             description: 'Обязательно надо сегодня',
-            completed: false,
             status: TaskStatus.QUEUE,
             date: '10/10/2023',
             priority: TaskPriority.P_1,
@@ -75,7 +78,6 @@ const initialState: TaskState = {
             id: 1,
             title: 'Добавить кнопку "Добавить"',
             description: 'Обязательно надо сегодня',
-            completed: false,
             status: TaskStatus.QUEUE,
             date: '10/10/2023',
             priority: TaskPriority.P_2,
@@ -85,7 +87,6 @@ const initialState: TaskState = {
             id: 2,
             title: 'Фильтрация тасков',
             description: 'Обязательно надо сегодня',
-            completed: false,
             status: TaskStatus.DONE,
             date: '10/10/2023',
             priority: TaskPriority.P_3,
@@ -109,27 +110,12 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                     id: nextTaskId(state.tasks),
                     title: action.payload?.title,
                     description: '',
-                    completed: false,
                     status: TaskStatus.QUEUE,
                     date: action.payload?.date,
                     priority: TaskPriority.P_1,
                     subTasks: []
                 }
             ]
-        }
-    }
-    if (createActionB.match(action)) {
-        return {
-            ...state,
-            tasks: state.tasks.map(task => {
-                if (task.id !== action.payload) {
-                    return task
-                }
-                return {
-                    ...task,
-                    completed: !task.completed
-                }
-            })
         }
     }
     if (createActionC.match(action)) {
@@ -160,7 +146,6 @@ export default function taskReducer(state: TaskState = initialState, action: Any
             id: nextTaskId(state.tasks),
             title: action.payload?.title,
             description: '',
-            completed: false,
             status: TaskStatus.QUEUE,
             date: action.payload?.date,
             priority: TaskPriority.P_1,
@@ -196,6 +181,20 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                 }
             })
 
+        }
+    }
+    if (createActionG.match(action)) {
+        return {
+            ...state,
+            tasks: state.tasks.map(task => {
+                if (task.id !== action.payload?.id) {
+                    return task
+                }
+                return {
+                    ...task,
+                    timeInWork: action.payload.timeInWork
+                }
+            })
         }
     }
     return state

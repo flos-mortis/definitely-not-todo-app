@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEventHandler } from "react";
+import React, { ChangeEvent} from "react";
 
 import Modal from "./Modal";
 import { RootState } from "../state/store";

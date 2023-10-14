@@ -2,6 +2,7 @@ import React from "react";
 
 import ModalEdit from "./ModalEdit";
 import ModalAddSubtask from "./ModalAddSubtask";
+import Timer from "./Timer";
 
 interface ModalOpenTaskProps {
     task?: ITask

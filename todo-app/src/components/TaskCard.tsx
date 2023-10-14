@@ -5,6 +5,7 @@ import {useDrag} from 'react-dnd'
 
 import Modal from './Modal';
 import ModalOpenTask from './ModalOpenTask';
+import Timer from './Timer';
 
 interface TaskCardProps {
     key: number,
@@ -17,6 +18,7 @@ const selectTaskById = (state: RootState, taskId: number) => {
 
 const TaskCard = ({id}: TaskCardProps) => {
     const[isModalActive, setModalActive] = React.useState(false)
+
     const task = useAppSelector(state => selectTaskById(state, id))
 
     const [{isDragging}, drag] = useDrag(() => ({
@@ -27,12 +29,13 @@ const TaskCard = ({id}: TaskCardProps) => {
         })
     }))
 
-    const dispatch = useAppDispatch()
-
-    const handleCompletedChange = () => {
-        if (task)
-            dispatch({type: 'tasks/taskToggled', payload: id})
+    const timerStatus = () => {
+        if (task?.status === 'Development')
+            return true
+        else return false
     }
+
+    const dispatch = useAppDispatch()
 
     const handleDelete = () => {
         dispatch({type: 'tasks/taskDeleted', payload: task?.id})
@@ -55,13 +58,11 @@ const TaskCard = ({id}: TaskCardProps) => {
                 )}
             </div>
             <div className='task-card' ref={drag}>
-                <input 
-                    type='checkbox'
-                    checked={task?.completed} 
-                    onChange={handleCompletedChange} 
-                />
                 <p onClick={handleModalOpen}>{task?.title}</p>
                 <p>{task?.priority}</p>
+                { 
+                    timerStatus() && <Timer isActive={timerStatus()}></Timer>
+                }
                 <button onClick={handleDelete}>Delete</button>
             </div>
         </li>
