@@ -32,7 +32,8 @@ const TaskCard = ({id}: TaskCardProps) => {
     const timerStatus = () => {
         if (task?.status === 'Development')
             return true
-        else return false
+        else if(task?.status === 'Done') 
+            return false
     }
 
     const dispatch = useAppDispatch()
@@ -61,7 +62,8 @@ const TaskCard = ({id}: TaskCardProps) => {
                 <p onClick={handleModalOpen}>{task?.title}</p>
                 <p>{task?.priority}</p>
                 { 
-                    timerStatus() && <Timer isActive={timerStatus()}></Timer>
+                    !timerStatus() && task?.status === 'Queue' ? null 
+                        : <Timer isActive={timerStatus()}></Timer> 
                 }
                 <button onClick={handleDelete}>Delete</button>
             </div>
