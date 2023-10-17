@@ -2,14 +2,17 @@ import {AnyAction} from 'redux'
 import withMatcher from '../helper'
 import { TaskPriority, TaskStatus } from '../../enums'
 
-const createActionA = withMatcher((payload: {title: string, date: string}) => {
+const createActionA = withMatcher((payload: {
+        title: string, 
+        date: string
+    }) => {
     return {
         type: 'tasks/taskAdded',
         payload,
     }
 })
 
-const createActionC = withMatcher((payload?: number) => {
+const createActionC = withMatcher((payload: number) => {
     return {
         type: 'tasks/taskDeleted',
         payload,
@@ -42,7 +45,7 @@ const createActionE = withMatcher((payload: {
 }
 )
 
-const createActionF = withMatcher((payload? : {
+const createActionF = withMatcher((payload : {
         id: number,
         newStatus: string
     }) => {
@@ -53,7 +56,7 @@ const createActionF = withMatcher((payload? : {
     }
 )
 
-const createActionG = withMatcher((payload? : {
+const createActionG = withMatcher((payload : {
         id: number,
         timeInWork: number
     }) => {
@@ -62,9 +65,9 @@ const createActionG = withMatcher((payload? : {
             payload
         }
     }
-    )
+)
 
-const createActionH = withMatcher((payload?: {
+const createActionH = withMatcher((payload: {
         id: number,
         fileUrl: string
     }) => {
@@ -72,7 +75,8 @@ const createActionH = withMatcher((payload?: {
             type: 'tasks/filesAdded',
             payload
         }
-    })
+    }
+)
 
 const initialState: TaskState = {
     tasks: []
@@ -95,9 +99,12 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                     description: '',
                     status: TaskStatus.QUEUE,
                     date: action.payload?.date,
+                    dateExp: '',
+                    timeInWork: 0,
                     priority: TaskPriority.P_1,
                     subTasks: [],
-                    files: []
+                    files: [],
+                    comments: []
                 }
             ]
         }
@@ -145,9 +152,12 @@ export default function taskReducer(state: TaskState = initialState, action: Any
             description: '',
             status: TaskStatus.QUEUE,
             date: action.payload?.date,
+            dateExp: '',
+            timeInWork: 0,
             priority: TaskPriority.P_1,
             subTasks: [],
-            files: []
+            files: [],
+            comments: []
         }
         const updatedTasks = state.tasks.map((task) => {
             if (task.id === action.payload?.headTaskId) {

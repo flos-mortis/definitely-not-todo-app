@@ -1,15 +1,12 @@
 import { useAppDispatch, useAppSelector } from '../state/hooks';
 import {useDrop} from 'react-dnd'
 
-import { RootState } from '../state/store';
 import TaskCard from './TaskCard'
+import { selectTaskByStatus } from '../state/selectors';
 
 interface TaskListProps {
     title: string
 }
-
-const selectTaskByStatus = (state: RootState, title: string) => 
-    state.tasks.filter((task: ITask) => task.status === title)
 
 const TaskList = (props: TaskListProps) => {
     const tasks = useAppSelector((state) => selectTaskByStatus(state, props.title))

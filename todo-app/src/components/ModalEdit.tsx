@@ -1,19 +1,12 @@
 import React, { ChangeEvent } from 'react'
-import { ref, uploadBytes, listAll, getDownloadURL } from 'firebase/storage'
-import { v4 } from 'uuid'
 
 import Modal from "./Modal"
 import { useAppDispatch, useAppSelector } from '../state/hooks'
-import { RootState } from '../state/store'
-import storage from '../firebase'
 import Files from './Files'
+import { selectTaskById } from '../state/selectors'
 
 interface ModalEditProps {
     id?: number
-}
-
-const selectTaskById = (state: RootState, taskId?: number) => {
-    return state.tasks.find(task => task.id === taskId)
 }
 
 const ModalEdit = ({id}: ModalEditProps) => {

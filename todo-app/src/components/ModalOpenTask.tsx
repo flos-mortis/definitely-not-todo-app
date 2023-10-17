@@ -21,7 +21,7 @@ const ModalOpenTask = ({task}: ModalOpenTaskProps) => {
                 ))
             }
             <ModalEdit id={task?.id} key={task?.id}></ModalEdit>
-            <ModalAddSubtask headTaskId={task?.id}></ModalAddSubtask>
+            <ModalAddSubtask headTaskId={task?.id} key={task?.id}></ModalAddSubtask>
         </div>
     )
 }

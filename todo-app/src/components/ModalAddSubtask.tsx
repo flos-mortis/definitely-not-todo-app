@@ -1,15 +1,10 @@
 import React, { ChangeEvent} from "react";
 
 import Modal from "./Modal";
-import { RootState } from "../state/store";
 import { useAppDispatch } from "../state/hooks";
 
 interface ModalAddSubtaskProps {
     headTaskId?: number
-}
-
-const selectTaskById = (state: RootState, taskId?: number) => {
-    return state.tasks.find(task => task.id === taskId)
 }
 
 const ModalAddSubtask = ({headTaskId}: ModalAddSubtaskProps) => {

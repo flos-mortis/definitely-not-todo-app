@@ -6,14 +6,11 @@ import {useDrag} from 'react-dnd'
 import Modal from './Modal';
 import ModalOpenTask from './ModalOpenTask';
 import Timer from './Timer';
+import { selectTaskById } from '../state/selectors';
 
 interface TaskCardProps {
     key: number,
     id: number
-}
-
-const selectTaskById = (state: RootState, taskId: number) => {
-    return state.tasks.find(task => task.id === taskId)
 }
 
 const TaskCard = ({id}: TaskCardProps) => {
