@@ -7,7 +7,8 @@ interface ITask {
     dateExp?: string, 
     timeInWork?: number,
     priority: string,
-    subTasks: ITask[]
+    subTasks: ITask[],
+    files?: string[]
 }
 
 type TaskState = {

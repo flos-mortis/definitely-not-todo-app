@@ -15,6 +15,11 @@ const ModalOpenTask = ({task}: ModalOpenTaskProps) => {
             <p>Date: {task?.date}</p>
             <p>{task?.priority}</p>
             <p>Expire date: {task?.dateExp}</p>
+            {
+                task?.files?.map((file) => (
+                    <img src={file} style={{width: '50px', height: '50px'}}></img>
+                ))
+            }
             <ModalEdit id={task?.id} key={task?.id}></ModalEdit>
             <ModalAddSubtask headTaskId={task?.id}></ModalAddSubtask>
         </div>

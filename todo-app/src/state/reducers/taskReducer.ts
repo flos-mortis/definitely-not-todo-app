@@ -21,7 +21,8 @@ const createActionD = withMatcher((payload: {
         title: string, 
         description: string,
         priority: TaskPriority,
-        expDate: string
+        expDate: string,
+        files: string[]
     }) => {
     return {
         type: 'tasks/taskEdited',
@@ -136,7 +137,8 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                     title: action.payload.title,
                     description: action.payload.description,
                     priority: action.payload.priority,
-                    dateExp: action.payload.expDate
+                    dateExp: action.payload.expDate,
+                    files: action.payload.files
                 }
             })
         }
