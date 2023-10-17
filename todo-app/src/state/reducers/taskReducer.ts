@@ -64,36 +64,18 @@ const createActionG = withMatcher((payload? : {
     }
     )
 
+const createActionH = withMatcher((payload?: {
+        id: number,
+        fileUrl: string
+    }) => {
+        return {
+            type: 'tasks/filesAdded',
+            payload
+        }
+    })
+
 const initialState: TaskState = {
-    tasks: [
-        {
-            id: 0,
-            title: 'Редактировать таски',
-            description: 'Обязательно надо сегодня',
-            status: TaskStatus.QUEUE,
-            date: '10/10/2023',
-            priority: TaskPriority.P_1,
-            subTasks: []
-        },
-        {
-            id: 1,
-            title: 'Добавить кнопку "Добавить"',
-            description: 'Обязательно надо сегодня',
-            status: TaskStatus.QUEUE,
-            date: '10/10/2023',
-            priority: TaskPriority.P_2,
-            subTasks: []
-        },
-        {
-            id: 2,
-            title: 'Фильтрация тасков',
-            description: 'Обязательно надо сегодня',
-            status: TaskStatus.DONE,
-            date: '10/10/2023',
-            priority: TaskPriority.P_3,
-            subTasks: []
-        },
-    ]
+    tasks: []
 }
 
 function nextTaskId(tasks: ITask[]) {
@@ -114,7 +96,8 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                     status: TaskStatus.QUEUE,
                     date: action.payload?.date,
                     priority: TaskPriority.P_1,
-                    subTasks: []
+                    subTasks: [],
+                    files: []
                 }
             ]
         }
@@ -123,6 +106,19 @@ export default function taskReducer(state: TaskState = initialState, action: Any
         return {
             ...state,
             tasks: state.tasks.filter((task: ITask) => task.id !== action.payload)
+        }
+    }
+    if (createActionH.match(action)) {
+        return {
+            ...state,
+            tasks: state.tasks.map((task) => {
+                if (task.id !== action.payload?.id) 
+                    return task
+                return {
+                    ...task,
+                    files: [...task.files, action.payload.fileUrl]
+                }
+            })
         }
     }
     if (createActionD.match(action)) {
@@ -137,8 +133,7 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                     title: action.payload.title,
                     description: action.payload.description,
                     priority: action.payload.priority,
-                    dateExp: action.payload.expDate,
-                    files: action.payload.files
+                    dateExp: action.payload.expDate
                 }
             })
         }
@@ -151,7 +146,8 @@ export default function taskReducer(state: TaskState = initialState, action: Any
             status: TaskStatus.QUEUE,
             date: action.payload?.date,
             priority: TaskPriority.P_1,
-            subTasks: []
+            subTasks: [],
+            files: []
         }
         const updatedTasks = state.tasks.map((task) => {
             if (task.id === action.payload?.headTaskId) {

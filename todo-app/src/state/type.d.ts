@@ -8,7 +8,7 @@ interface ITask {
     timeInWork?: number,
     priority: string,
     subTasks: ITask[],
-    files?: string[]
+    files: string[]
 }
 
 type TaskState = {
