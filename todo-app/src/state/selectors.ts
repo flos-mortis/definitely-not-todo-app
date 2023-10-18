@@ -6,3 +6,6 @@ export const selectTaskById = (state: RootState, taskId?: number) => {
 export const selectTaskByStatus = (state: RootState, title: string) => 
     state.tasks.filter((task: ITask) => task.status === title)
 
+export const selectCommentById = (state: RootState, commentId?: number) => {
+    return state.comments.find(comment => comment.id === commentId)
+}

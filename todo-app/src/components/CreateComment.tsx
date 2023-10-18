@@ -29,6 +29,7 @@ const CreateComment = ({taskId}: CreateCommentProps) => {
             <input 
                 type="text"
                 onChange={handleInputChange}
+                value={text}
             />
             <button onClick={handleClickButton}>Add comment</button>
         </div>
