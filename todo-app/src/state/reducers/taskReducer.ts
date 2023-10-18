@@ -2,6 +2,11 @@ import {AnyAction} from 'redux'
 import withMatcher from '../helper'
 import { TaskPriority, TaskStatus } from '../../enums'
 
+const initialState = {
+    tasks: [],
+    comments: []
+}
+
 const createActionA = withMatcher((payload: {
         title: string, 
         date: string
@@ -78,12 +83,34 @@ const createActionH = withMatcher((payload: {
     }
 )
 
-const initialState: TaskState = {
-    tasks: []
-}
+const createActionI = withMatcher((payload: {
+        taskId: number,
+        text: string
+    }) => {
+        return {
+            type: 'tasks/commentAdded',
+            payload
+        }
+    }
+)
+const createActionJ = withMatcher((payload : {
+        headCommentId: number,
+        text: string
+    }) => {
+        return {
+            type: 'tasks/subCommentAdded',
+            payload
+        }
+    }
+)
 
 function nextTaskId(tasks: ITask[]) {
     const maxId = tasks.reduce((maxId, task) => Math.max(task.id, maxId), -1)
+    return maxId + 1
+}
+
+function nextCommentId(comments: IComment[]) {
+    const maxId = comments.reduce((maxId, comment) => Math.max(comment.id, maxId), -1)
     return maxId + 1
 }
 
@@ -203,6 +230,51 @@ export default function taskReducer(state: TaskState = initialState, action: Any
                     timeInWork: action.payload.timeInWork
                 }
             })
+        }
+    }
+    if (createActionI.match(action)) {
+        const newComment: IComment = {
+            id: nextCommentId(state.comments),
+            text: action.payload.text,
+            subComments: []
+        }
+        return {
+            ...state,
+            tasks: state.tasks.map((task) => {
+                if (task.id !== action.payload.taskId)
+                    return task
+                return {
+                    ...task,
+                    comments: [...task.comments, newComment]
+                }
+            }),
+            comments: [
+                ...state.comments,
+                newComment
+            ]
+        }
+    }
+    if (createActionJ.match(action)) {
+        const newSubComment: IComment = {
+            id: nextCommentId(state.comments),
+            text: action.payload.text,
+            subComments: []
+        }
+        const updatedComments = state.comments.map((comment) => {
+            if (comment.id === action.payload.headCommentId) {
+                return {
+                    ...comment,
+                    subComments: [...comment.subComments, newSubComment]
+                }
+            }
+            return comment
+        })
+        return {
+            ...state,
+            comments: [
+                ...updatedComments,
+                newSubComment
+            ]
         }
     }
     return state

@@ -2,6 +2,7 @@ import React from "react";
 
 import ModalEdit from "./ModalEdit";
 import ModalAddSubtask from "./ModalAddSubtask";
+import CreateComment from "./CreateComment";
 
 interface ModalOpenTaskProps {
     task?: ITask
@@ -22,6 +23,14 @@ const ModalOpenTask = ({task}: ModalOpenTaskProps) => {
             }
             <ModalEdit id={task?.id} key={task?.id}></ModalEdit>
             <ModalAddSubtask headTaskId={task?.id} key={task?.id}></ModalAddSubtask>
+            {
+                task?.comments.map((comment) => {
+                    return (
+                        <p>{comment.text}</p>
+                    )
+                })
+            }
+            <CreateComment taskId={task?.id} key={task?.id}></CreateComment>
         </div>
     )
 }

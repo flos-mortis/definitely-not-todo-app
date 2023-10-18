@@ -4,19 +4,12 @@ import storage from 'redux-persist/lib/storage'
 import { combineReducers } from 'redux'
 
 import taskReducer from './reducers/taskReducer'
-import commentReducer from './reducers/commentReducer'
 
 const persistConfig = {
   key: 'root',
   storage
 }
-
-const rootReducer = combineReducers({
-  taskReducer: taskReducer, 
-  commentReducer: commentReducer,
-})
-
-const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, taskReducer)
 
 const store = createStore(persistedReducer)
 

@@ -13,15 +13,12 @@ interface ITask {
 }
 
 type TaskState = {
-    tasks: ITask[]
+    tasks: ITask[],
+    comments: IComment[]
 }
 
 interface IComment {
     id: number,
     text: string,
     subComments: IComment[]
-}
-
-type CommentState = {
-    comments: IComment[]
 }
