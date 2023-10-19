@@ -24,12 +24,12 @@ const ModalOpenTask = ({task}: ModalOpenTaskProps) => {
             }
             {
                 task?.comments.map((comment) => (
-                    <Comment commentId={comment.id} key={comment.id}></Comment>
+                    <Comment commentId={comment.id} taskId={task.id}></Comment>
                 ))
             }
-            <CreateComment taskId={task?.id} key={task?.id}></CreateComment>
-            <ModalEdit id={task?.id} key={task?.id}></ModalEdit>
-            <ModalAddSubtask headTaskId={task?.id} key={task?.id}></ModalAddSubtask>
+            <CreateComment taskId={task?.id}></CreateComment>
+            <ModalEdit id={task?.id}></ModalEdit>
+            <ModalAddSubtask headTaskId={task?.id}></ModalAddSubtask>
         </div>
     )
 }

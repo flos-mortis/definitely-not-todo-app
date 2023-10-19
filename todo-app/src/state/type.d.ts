@@ -19,6 +19,7 @@ type TaskState = {
 
 interface IComment {
     id: number,
+    taskId: number,
     text: string,
-    subComments: IComment[]
+    replies: IComment[]
 }

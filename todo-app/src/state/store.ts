@@ -1,7 +1,6 @@
 import { legacy_createStore as createStore} from 'redux'
 import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import { combineReducers } from 'redux'
 
 import taskReducer from './reducers/taskReducer'
 

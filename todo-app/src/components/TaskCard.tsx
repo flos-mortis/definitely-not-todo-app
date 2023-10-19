@@ -1,12 +1,12 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../state/hooks';
-import { RootState } from '../state/store';
 import {useDrag} from 'react-dnd'
 
 import Modal from './Modal';
 import ModalOpenTask from './ModalOpenTask';
 import Timer from './Timer';
 import { selectTaskById } from '../state/selectors';
+import { TaskStatus } from '../enums';
 
 interface TaskCardProps {
     key: number,
@@ -27,9 +27,9 @@ const TaskCard = ({id}: TaskCardProps) => {
     }))
 
     const timerStatus = () => {
-        if (task?.status === 'Development')
+        if (task?.status === TaskStatus.DEVELOPMENT)
             return true
-        else if(task?.status === 'Done') 
+        else if(task?.status === TaskStatus.DONE) 
             return false
     }
 
@@ -59,7 +59,7 @@ const TaskCard = ({id}: TaskCardProps) => {
                 <p onClick={handleModalOpen}>{task?.title}</p>
                 <p>{task?.priority}</p>
                 { 
-                    !timerStatus() && task?.status === 'Queue' ? null 
+                    !timerStatus() && task?.status === TaskStatus.QUEUE ? null 
                         : <Timer isActive={timerStatus()}></Timer> 
                 }
                 <button onClick={handleDelete}>Delete</button>

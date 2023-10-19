@@ -95,10 +95,11 @@ const createActionI = withMatcher((payload: {
 )
 const createActionJ = withMatcher((payload : {
         headCommentId: number,
-        text: string
+        text: string,
+        taskId: number
     }) => {
         return {
-            type: 'tasks/subCommentAdded',
+            type: 'tasks/replyAdded',
             payload
         }
     }
@@ -136,10 +137,11 @@ export default function taskReducer(state: TaskState = initialState, action: Any
             ]
         }
     }
-    if (createActionC.match(action)) {
+    if (createActionC.match(action)) { 
         return {
             ...state,
-            tasks: state.tasks.filter((task: ITask) => task.id !== action.payload)
+            tasks: state.tasks.filter((task: ITask) => task.id !== action.payload),
+            comments: state.comments.filter((comment) => comment.taskId !== action.payload)
         }
     }
     if (createActionH.match(action)) {
@@ -235,8 +237,9 @@ export default function taskReducer(state: TaskState = initialState, action: Any
     if (createActionI.match(action)) {
         const newComment: IComment = {
             id: nextCommentId(state.comments),
+            taskId: action.payload.taskId,
             text: action.payload.text,
-            subComments: []
+            replies: []
         }
         return {
             ...state,
@@ -257,14 +260,15 @@ export default function taskReducer(state: TaskState = initialState, action: Any
     if (createActionJ.match(action)) {
         const newSubComment: IComment = {
             id: nextCommentId(state.comments),
+            taskId: action.payload.taskId,
             text: action.payload.text,
-            subComments: []
+            replies: []
         }
         const updatedComments = state.comments.map((comment) => {
             if (comment.id === action.payload.headCommentId) {
                 return {
                     ...comment,
-                    subComments: [...comment.subComments, newSubComment]
+                    replies: [...comment.replies, newSubComment]
                 }
             }
             return comment
