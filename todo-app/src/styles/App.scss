@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Noto Serif Dogra:700|Noto Serif Dogra:400');
 
-$color-text: #130e01;
+$color-text: #674d4b;
 $color-primary: #ff8400;
 $color-secondary: #fff5d6;
 $color-accent: #cf4307;
@@ -32,7 +32,7 @@ $color-background: #fffaeb;
 
 body {
   background-color: $color-background;
-  font-family: 'Noto Serif Dogra';
+  font-family: Arial, sans-serif;
   font-weight: 400;
 }
 
@@ -40,6 +40,12 @@ a,
 p,
 h1, h2, h3, h4, h5, h6 {
   color: $color-text;
+}
+
+button {
+  background-color: $color-primary;
+  color: $color-secondary;
+  border: none;
 }
 
 .container {
@@ -61,7 +67,9 @@ h1, h2, h3, h4, h5, h6 {
 
   .modal-content {
     background-color: $color-background;
-    border: 1px solid $color-accent;
+    border: 1.5px solid $color-accent;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
   }
 }
 
@@ -81,17 +89,37 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 5px;
     padding: 1rem;
     flex: 1 1 0;
+    list-style: none;
+    text-transform: uppercase;
 
     .task-card {
       margin-top: 1rem;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
       background-color: $color-background;
       border: 1px solid rgba($color-accent, .2);
-      padding: 0.5rem;
+      padding: 0.5rem 0.75rem;
       border-radius: 5px;
+      text-transform: none;
 
-      p {
-        margin-left: 0.5rem;
+      .task-icons {
+        display: flex;  
+        
+        .btn-edit, .btn-delete {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          margin-left: 0.5rem;
+          padding: 0.35rem; 
+          &:hover, &:focus {
+            cursor: pointer;
+            background-color: #e47600;
+          }
+        }
+      }
+      .task-title:hover, .task-title:focus {
+        cursor: pointer;
       }
     }
   }

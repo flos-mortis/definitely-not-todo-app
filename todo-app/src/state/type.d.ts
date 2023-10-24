@@ -6,7 +6,7 @@ interface ITask {
     date: string,
     dateExp: string, 
     timeInWork: number,
-    priority: string,
+    priority: number,
     subTasks: ITask[],
     files: string[],
     comments: IComment[]

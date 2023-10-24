@@ -39,7 +39,6 @@ const Timer = ({isActive}: TimerProps) => {
 
     return (
         <div>
-            <p>Time in work:</p>
             <p>{formatTime()}</p>
         </div>
     )

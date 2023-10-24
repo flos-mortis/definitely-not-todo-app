@@ -7,6 +7,7 @@ import ModalOpenTask from './ModalOpenTask';
 import Timer from './Timer';
 import { selectTaskById } from '../state/selectors';
 import { TaskStatus } from '../enums';
+import ModalEdit from './ModalEdit';
 
 interface TaskCardProps {
     key: number,
@@ -14,7 +15,7 @@ interface TaskCardProps {
 }
 
 const TaskCard = ({id}: TaskCardProps) => {
-    const[isModalActive, setModalActive] = React.useState(false)
+    const[isOpenTaskModalActive, setOpenTaskModalActive] = React.useState(false)
 
     const task = useAppSelector(state => selectTaskById(state, id))
 
@@ -39,30 +40,34 @@ const TaskCard = ({id}: TaskCardProps) => {
         dispatch({type: 'tasks/taskDeleted', payload: task?.id})
     } 
 
-    const handleModalOpen = () => {
-        setModalActive(true)
+    const handleTaskOpenModalOpen = () => {
+        setOpenTaskModalActive(true)
     }
       
-    const handleModalClose = () => {
-        setModalActive(false)
+    const handleTaskOpenModalClose = () => {
+        setOpenTaskModalActive(false)
     }
     return(
         <li>
             <div>
-                {isModalActive && (
-                    <Modal isShown={isModalActive} onClose={handleModalClose}>
+                {isOpenTaskModalActive && (
+                    <Modal isShown={isOpenTaskModalActive} onClose={handleTaskOpenModalClose}>
                         <ModalOpenTask task={task}></ModalOpenTask>
                     </Modal>
                 )}
             </div>
             <div className='task-card' ref={drag}>
-                <p onClick={handleModalOpen}>{task?.title}</p>
-                <p>{task?.priority}</p>
+                <p onClick={handleTaskOpenModalOpen} className='task-title'>{task?.title}</p>
                 { 
                     !timerStatus() && task?.status === TaskStatus.QUEUE ? null 
                         : <Timer isActive={timerStatus()}></Timer> 
                 }
-                <button onClick={handleDelete}>Delete</button>
+                <div className='task-icons'>
+                    <ModalEdit id={task?.id}></ModalEdit>
+                    <button onClick={handleDelete} className='btn-delete'>
+                        <i className="fa-solid fa-trash"></i>
+                    </button>
+                </div>
             </div>
         </li>
     )

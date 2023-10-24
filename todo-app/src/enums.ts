@@ -5,7 +5,7 @@ export enum TaskStatus {
 }
 
 export enum TaskPriority {
-    P_1 = 'Priority 1',
-    P_2 = 'Priority 2',
-    P_3 = 'Priority 3'
+    P_1 = 1,
+    P_2 = 2,
+    P_3 = 3
 }

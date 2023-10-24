@@ -16,7 +16,6 @@ function App() {
           <div className='App'>
             <main>
               <section className='container'>
-                <input placeholder='Search'/>
                 <div className='todo-main'>
                   <TaskList title='Queue'/>
                   <TaskList title='Development' />
