@@ -4,7 +4,6 @@ import Modal from "./Modal"
 import { useAppDispatch, useAppSelector } from '../state/hooks'
 import Files from './Files'
 import { selectTaskById } from '../state/selectors'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface ModalEditProps {
     id?: number
