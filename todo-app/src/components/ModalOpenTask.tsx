@@ -30,7 +30,7 @@ const ModalOpenTask = ({task}: ModalOpenTaskProps) => {
             <div className="files-section">
             {
                 task?.files?.map((file) => (
-                    <img src={file} style={{width: 'auto', height: '50px'}}></img>
+                    <img src={file}></img>
                 ))
             }
             </div>
