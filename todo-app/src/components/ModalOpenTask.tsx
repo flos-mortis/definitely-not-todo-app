@@ -10,7 +10,7 @@ interface ModalOpenTaskProps {
 
 const ModalOpenTask = ({task}: ModalOpenTaskProps) => {
     return (
-        <div className='modal modal-open-task'>
+        <div className='modal modal-content-child'>
             <div className="task-card-head flex-row">
                 <p className="task-status">{task?.status}</p>
                 <p className="task-date">{task?.date}</p>

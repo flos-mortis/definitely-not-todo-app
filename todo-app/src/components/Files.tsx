@@ -44,7 +44,7 @@ const Files = ({taskId}: FilesProps) => {
     return (
         <div>
             <input type='file' onChange={handleFileChange}/>
-            <button onClick={uploadFiles}>upload file</button>
+            <button onClick={uploadFiles} className='btn-rnd-corner'>Upload file</button>
         </div>
     )
 }

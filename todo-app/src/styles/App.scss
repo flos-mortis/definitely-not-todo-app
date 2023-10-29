@@ -5,6 +5,7 @@ $color-primary: #ff8400;
 $color-secondary: #ffffff;
 $color-accent: #cf4307;
 $color-background: #f4f4f4;
+$color-disabled: #c8c8c8;
 
 @mixin breakpoint($point) {
   @if $point == "sm" {
@@ -42,11 +43,14 @@ h1, h2, h3, h4, h5, h6 {
   color: $color-text;
 }
 
-input {
+input[type='text'], 
+input[type='date'], 
+select {
   border-radius: 15px;
   padding: 0.25rem 0.5rem;
   border: 1px solid $color-accent;
 }
+
 
 button {
   background-color: $color-primary;
@@ -55,6 +59,10 @@ button {
   &:hover, &:focus {
     cursor: pointer;
   }
+}
+
+button:disabled {
+  background-color: $color-disabled;
 }
 
 .btn-round {
@@ -72,6 +80,11 @@ button {
 .btn-rnd-corner {
   border-radius: 15px;
   padding: 0.25rem 0.5rem;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: space-between;
 }
 
 .container {
@@ -131,33 +144,29 @@ button {
         }
       }
     }
-    .modal-open-task {
+    
+    .modal-content-child {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
       margin-top: 1rem;
 
-      .flex-row {
+      .task-status, .task-date {
+        font-size: 1rem;
+      }
+
+      .task-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .task-priority-back {
+        width: 1.55rem;
+        height: 1.55rem;
+        border-radius: 50%;
         display: flex;
-        justify-content: space-between;
-
-        .task-status, .task-date {
-          font-size: 1rem;
-        }
-
-        .task-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-        }
-
-        .task-priority-back {
-          width: 1.55rem;
-          height: 1.55rem;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+        justify-content: center;
+        align-items: center;
       }
 
       .task-expire {
