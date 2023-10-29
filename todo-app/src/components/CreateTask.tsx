@@ -27,6 +27,7 @@ const CreateTask = () => {
             value={text}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
+            style={{marginTop: '10px', width: '30%'}}
         />
     )
 }
