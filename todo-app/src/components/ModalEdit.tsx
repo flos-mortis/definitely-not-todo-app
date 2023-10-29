@@ -62,7 +62,7 @@ const ModalEdit = ({id}: ModalEditProps) => {
 
     return (
         <div>
-            <button onClick={handleModalOpen} className='btn-edit'>
+            <button onClick={handleModalOpen} className='btn-edit btn-round'>
                 <i className="fa-solid fa-pen"></i>
             </button>
             {isModalActive && (

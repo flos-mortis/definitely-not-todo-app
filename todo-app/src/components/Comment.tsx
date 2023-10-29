@@ -32,14 +32,13 @@ const Comment = ({commentId, taskId} : CommentProps) => {
 
     const comment = useAppSelector(state => selectCommentById(state, commentId))
     return (
-        <div>
+        <div className="comments">
             <p>{comment?.text}</p>
             {
                 comment?.replies.map((reply) => (
-                    <p>{reply.text}</p>
+                    <p className="replies-text">{reply.text}</p>
                 ))
             }
-            <button onClick={handleVisibleInput}>Reply</button>
             {
                 visible && (
                     <input
@@ -50,6 +49,7 @@ const Comment = ({commentId, taskId} : CommentProps) => {
                     />
                 )
             }
+            <button onClick={handleVisibleInput} className="btn-rnd-corner">Reply</button>
         </div>
     )
 }

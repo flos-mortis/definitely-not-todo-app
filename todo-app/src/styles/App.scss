@@ -2,9 +2,9 @@
 
 $color-text: #674d4b;
 $color-primary: #ff8400;
-$color-secondary: #fff5d6;
+$color-secondary: #ffffff;
 $color-accent: #cf4307;
-$color-background: #fffaeb;
+$color-background: #f4f4f4;
 
 @mixin breakpoint($point) {
   @if $point == "sm" {
@@ -42,15 +42,60 @@ h1, h2, h3, h4, h5, h6 {
   color: $color-text;
 }
 
+input {
+  border-radius: 15px;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid $color-accent;
+}
+
 button {
   background-color: $color-primary;
   color: $color-secondary;
   border: none;
+  &:hover, &:focus {
+    cursor: pointer;
+  }
+}
+
+.btn-round {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-left: 0.5rem;
+  padding: 0.35rem; 
+  &:hover, &:focus {
+    cursor: pointer;
+    background-color: #e47600;
+  }
+}
+
+.btn-rnd-corner {
+  border-radius: 15px;
+  padding: 0.25rem 0.5rem;
 }
 
 .container {
   margin: 0 auto;
   padding: 1rem;
+}
+
+.priority-1 {
+  background-color: $color-accent;
+  p {
+    color: $color-secondary;
+  }
+}
+.priority-2 {
+  background-color: $color-primary;
+}
+.priority-3 {
+  background-color: #fade88;
+}
+.priority-4 {
+  background-color: #3c9c35;
+  p {
+    color: $color-secondary;
+  }
 }
 
 .modal-wrap {
@@ -66,10 +111,97 @@ button {
   justify-content: center;
 
   .modal-content {
-    background-color: $color-background;
+    background-color: $color-secondary;
     border: 1.5px solid $color-accent;
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
+    border-radius: 20px;
+    padding: 1rem 2rem;
+
+    .modal-close {
+      display: flex;
+      justify-content: flex-end;
+
+      .btn-close {
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: $color-secondary;
+        border: 1px solid $color-accent;
+        padding: 0.3rem;
+        .fa-xmark {
+          color: $color-accent;
+        }
+      }
+    }
+    .modal-open-task {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+
+      .flex-row {
+        display: flex;
+        justify-content: space-between;
+
+        .task-status, .task-date {
+          font-size: 1rem;
+        }
+
+        .task-title {
+          font-size: 1.25rem;
+          font-weight: 700;
+        }
+
+        .task-priority-back {
+          width: 1.55rem;
+          height: 1.55rem;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      .task-expire {
+        display: flex;
+        font-size: 0.8rem;
+
+        .fa-clock {
+          color: $color-accent;
+        }
+
+        .task-expire-date {
+          margin-left: 5px;
+          color: $color-accent;
+        }
+      }
+      .files-section {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .comments-section {
+        margin-top: 0.75rem;
+
+        .comments {
+          p, input, button {
+            margin-top: 5px;
+          }
+          button {
+            margin-left: 5px;
+          }
+        }
+
+        .create-comment {
+          margin-top: 1rem;
+          input, button {
+            margin-top: 0.8rem;
+            margin-left: 5px;
+          }
+        }
+
+        .replies-text {
+          margin-left: 10px;
+        }
+      }
+    }
   }
 }
 
@@ -105,18 +237,6 @@ button {
 
       .task-icons {
         display: flex;  
-        
-        .btn-edit, .btn-delete {
-          width: 2rem;
-          height: 2rem;
-          border-radius: 50%;
-          margin-left: 0.5rem;
-          padding: 0.35rem; 
-          &:hover, &:focus {
-            cursor: pointer;
-            background-color: #e47600;
-          }
-        }
       }
       .task-title:hover, .task-title:focus {
         cursor: pointer;

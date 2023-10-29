@@ -64,7 +64,7 @@ const TaskCard = ({id}: TaskCardProps) => {
                 }
                 <div className='task-icons'>
                     <ModalEdit id={task?.id}></ModalEdit>
-                    <button onClick={handleDelete} className='btn-delete'>
+                    <button onClick={handleDelete} className='btn-delete btn-round'>
                         <i className="fa-solid fa-trash"></i>
                     </button>
                 </div>

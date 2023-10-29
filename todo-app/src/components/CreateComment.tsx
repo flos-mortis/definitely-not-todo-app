@@ -25,13 +25,14 @@ const CreateComment = ({taskId}: CreateCommentProps) => {
     }
 
     return (
-        <div>
+        <div className="create-comment">
+            <hr></hr>
             <input 
                 type="text"
                 onChange={handleInputChange}
                 value={text}
             />
-            <button onClick={handleClickButton}>Add comment</button>
+            <button onClick={handleClickButton} className="btn-rnd-corner">Add comment</button>
         </div>
     )
 }

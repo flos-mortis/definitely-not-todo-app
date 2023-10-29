@@ -13,8 +13,12 @@ const Modal = ({isShown, children, onClose}: ModalProps) => {
         ? ReactDOM.createPortal(
             <div className='modal-wrap'>
                 <div className='modal-content'>
+                    <div className='modal-close'>
+                        <button onClick={onClose} className='btn-close btn-round'>
+                            <i className="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
                     {children}
-                    <button onClick={onClose}>Close</button>
                 </div>
             </div>,
             document.body

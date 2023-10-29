@@ -41,7 +41,7 @@ const ModalAddSubtask = ({headTaskId}: ModalAddSubtaskProps) => {
 
     return (
         <div>
-            <button onClick={handleModalOpen}>Add subtask</button>
+            <button onClick={handleModalOpen} className="btn-rnd-corner">Add subtask</button>
             {
                 isModalActive && (
                     <Modal isShown={isModalActive} onClose={handleModalClose}>
@@ -52,7 +52,7 @@ const ModalAddSubtask = ({headTaskId}: ModalAddSubtaskProps) => {
                             value={text}
                             onChange={handleInputChange}
                         />
-                        <button onClick={handleAddClick}>Add</button>
+                        <button onClick={handleAddClick} className="btn-rnd-corner">Add</button>
                     </Modal>
                 )
             }
