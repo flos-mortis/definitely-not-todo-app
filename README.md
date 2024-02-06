@@ -12,7 +12,7 @@ Adaptive design, mobile friendly
 - ~~delete task~~
 - ~~queue/development/done~~
 - ~~drag-n-drop~~
-- priorities
-- comments
-- attach files
+- ~~priorities~~
+- ~~comments~~
+- ~~attach files~~
 - search by id/title
